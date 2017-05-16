@@ -6,16 +6,16 @@ public class Roads {
    private  int trafficlights;
    private double traficconstant;
    private double at;
- public	node backnode = new node();
- public node forwardnode = new node();
-	
-	public Roads(){
+   public node backnode = new node();
+   public node forwardnode = new node();
+   Line line1 = new Line();	
+   public Roads(){
 		
 	}
-	public void setnumofLanes(int x) {
+   public void setnumofLanes(int x) {
 		x=numofLanes;
 	}
-	public void setlenght(int y){
+   public void setlenght(int y){
 		y=lenght;
 	}
    public int getnumofLanes(){
