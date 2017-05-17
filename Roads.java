@@ -1,5 +1,5 @@
 
-public class Roads {
+public class Road {
    private	int numofLanes;
    private   int lenght;
    private	int Capacity;
