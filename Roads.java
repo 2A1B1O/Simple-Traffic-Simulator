@@ -1,27 +1,27 @@
 public class Road {
 	private int numofLanes;
 	private int lenght;
-	private int Capacity;
-	private int trafficlights;
-	private double traficconstant;
+	private int capacity;
+	private int trafficLights;
+	private double traficConstant;
 	private double at;
-	private int backcap;
-	private int forwardcap;
-	public node backnode = new node();
-	public node forwardnode = new node();
+	private int backCap;
+	private int forwardCap;
+	public node backNode = new node();
+	public node forwardNode = new node();
 	Line line1 = new Line();
 
 	public Road() {
-		backcap = backnode.getNumberOfCars();
-		forwardcap = forwardnode.getNumberOfCars();
-		backcap = forwardcap;
+		backCap = backNode.getNumberOfCars();
+		forwardCap = forwardNode.getNumberOfCars();
+		backCap = forwardCap;
 	}
 
-	public void setnumofLanes(int x) {
+	public void setNumofLanes(int x) {
 		x = numofLanes;
 	}
 
-	public void setlenght(int y) {
+	public void setLenght(int y) {
 		y = lenght;
 	}
 
@@ -29,35 +29,35 @@ public class Road {
 		return numofLanes;
 	}
 
-	public int getlenght() {
+	public int getLenght() {
 		return lenght;
 	}
 
 	public void addTrafficLights(int k) {
-		k = trafficlights;
+		k = trafficLights;
 	}
 
 	public void setCapacity() {
-		Capacity = numofLanes * lenght;
+		capacity = numofLanes * lenght;
 	}
 
 	public int getCapacity() {
 
-		return Capacity;
+		return capacity;
 	}
 
 	public void calculateTraffic() {
-		if (trafficlights == 0) {
-			traficconstant = backcap / Capacity;
+		if (trafficLights == 0) {
+			traficConstant = backCap / capacity;
 
 		} else {
-			at = Math.pow(1.25, trafficlights);
-			traficconstant = backcap / Capacity * at;
+			at = Math.pow(1.25, trafficLights);
+			traficConstant = backCap / capacity * at;
 
 		}
 	}
 
-	public double gettrafficConstant() {
-		return traficconstant;
+	public double getTrafficConstant() {
+		return traficConstant;
 	}
 }
