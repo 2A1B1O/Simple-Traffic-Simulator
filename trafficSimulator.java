@@ -12,6 +12,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -54,7 +56,7 @@ public class trafficSimulator extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.darkGray);
+		panel.setBackground(Color.gray);
 		panel.setBounds(10, 59, 777, 339);
 		contentPane.add(panel);
 
@@ -66,32 +68,59 @@ public class trafficSimulator extends JFrame {
 		JMenu mnCreate = new JMenu("Create");
 		menuBar.add(mnCreate);
 		Map myMap = new Map();
-		JMenuItem mnýtmRoad = new JMenuItem("Road");
+		JMenuItem mnÃ½tmRoad = new JMenuItem("Road");
 		class CreateRoadListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				try {
-				Graphics g = panel.getGraphics();
-				Line a = new Line(200, 0, 100, 150);
+				Line a = new Line(0, 0, 0, 0);
 				Road r= new Road();
 				r.setLine(a);
 				myMap.AddRoad(r);
-				g.drawLine(a.getX(), a.getY(), a.getX1(), a.getY1());
-				
-				
-					JTextField densityOfRoad = new JTextField();
-					JTextField laneNum=new JTextField();
+				panel.addMouseListener(new MouseAdapter() { 			//PANEL LISTENER BEGIN
+					int oldX;
+					int oldY;
+					int newX;
+					int newY;
+					boolean HAYDAR=true;
 					
-					final JComponent[] inputs = new JComponent[] {
-					        new JLabel("Density"),
-					        densityOfRoad,
-					        new JLabel("Number Of Lanes"),
-					        laneNum,
-					       
-					};
-					int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
-					if (result == JOptionPane.OK_OPTION) {
-					    myMap.getMyRoads().get(1).setCapacity(Integer.parseInt(densityOfRoad.getText()));
+					public void mousePressed(MouseEvent evt) {
+						oldX = evt.getX();
+						oldY = evt.getY();
+						System.out.println("Source X is: "+oldX+", Source Y is: "+oldY);
 					}
+					public void mouseReleased(MouseEvent e2){
+						newX = e2.getX();
+						newY = e2.getY();
+						System.out.println("Destination X is: "+newX+", Destination Y is: "+newY);
+						Graphics g = panel.getGraphics();
+						g.drawLine(oldX, oldY, newX, newY);
+						
+						JTextField densityOfRoad = new JTextField();
+						JTextField laneNum=new JTextField();
+						
+						final JComponent[] inputs = new JComponent[] {
+						        new JLabel("Density"),
+						        densityOfRoad,
+						        new JLabel("Number Of Lanes"),
+						        laneNum,
+						       
+						};
+						int result = JOptionPane.showConfirmDialog(null, inputs, "My custom dialog", JOptionPane.PLAIN_MESSAGE);
+						
+						if (result == JOptionPane.OK_OPTION) {
+						    myMap.getMyRoads().get(1).setCapacity(Integer.parseInt(densityOfRoad.getText()));
+						}
+						
+						
+						
+					
+				
+					}	//MOUSE LISTENER ENDS
+				
+				});					//ACTION LISTENER ENDS
+				
+						
+					
 					
 				} catch (Exception E) {
 					System.out.println(E.getMessage());
@@ -99,21 +128,41 @@ public class trafficSimulator extends JFrame {
 
 			}
 		}
-		mnýtmRoad.addActionListener(new CreateRoadListener());
-		mnCreate.add(mnýtmRoad);
+		mnÃ½tmRoad.addActionListener(new CreateRoadListener());
+		mnCreate.add(mnÃ½tmRoad);
 
-		JMenuItem mnýtmRoundabout = new JMenuItem("Roundabout");
-		mnCreate.add(mnýtmRoundabout);
+		JMenuItem mnÃ½tmRoundabout = new JMenuItem("Roundabout");
+		
+		class CreateRoundaboutListener implements ActionListener {
+			public void actionPerformed(ActionEvent evt) {
+				try{
+				panel.addMouseListener(new MouseAdapter() { 			//PANEL LISTENER BEGIN
+					int roundX;
+					int roundY;
+					public void mouseClicked(MouseEvent e3){
+						roundX = e3.getX();
+						roundY = e3.getY();
+						Graphics g = panel.getGraphics();
+						g.fillOval(roundX, roundY, 20, 20);}});			//PANEL LISTENER ENDS
+				}catch(Exception e){
+					System.out.println(e.getMessage());
+				}
+				
+				}
+		}
+		
+		mnÃ½tmRoundabout.addActionListener(new CreateRoundaboutListener());
+		mnCreate.add(mnÃ½tmRoundabout);
 
-		JMenuItem mnýtmNode = new JMenuItem("Node");
-		mnCreate.add(mnýtmNode);
+		JMenuItem mnÃ½tmNode = new JMenuItem("Node");
+		mnCreate.add(mnÃ½tmNode);
 
 		JMenu mnDelete = new JMenu("Delete");
 		menuBar.add(mnDelete);
 
 		JMenu mnSave = new JMenu("Save");
-		JMenuItem mnýtmSave = new JMenuItem("Save current map...");
-		mnSave.add(mnýtmSave);
+		JMenuItem mnÃ½tmSave = new JMenuItem("Save current map...");
+		mnSave.add(mnÃ½tmSave);
 		class SaveButtonListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -139,11 +188,11 @@ public class trafficSimulator extends JFrame {
 				}
 			}
 		}
-		mnýtmSave.addActionListener(new SaveButtonListener());
+		mnÃ½tmSave.addActionListener(new SaveButtonListener());
 		menuBar.add(mnSave);
 
 		JMenu mnOpen = new JMenu("Open");
-		JMenuItem mnýtmOpen = new JMenuItem("Choose and existing map...");
+		JMenuItem mnÃ½tmOpen = new JMenuItem("Choose and existing map...");
 		class OpenButtonListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -172,9 +221,9 @@ public class trafficSimulator extends JFrame {
 				}
 			}
 		}
-		mnýtmOpen.addActionListener(new OpenButtonListener());
+		mnÃ½tmOpen.addActionListener(new OpenButtonListener());
 		menuBar.add(mnOpen);
-		mnOpen.add(mnýtmOpen);
+		mnOpen.add(mnÃ½tmOpen);
 	}
 
 }
