@@ -7,9 +7,9 @@ public class Road {
 	private double at;
 	private int backCap;
 	private int forwardCap;
-	public node backNode = new node();
-	public node forwardNode = new node();
-	Line line1 = new Line();
+	private node backNode = new node();
+	private node forwardNode = new node();
+	private Line line1 = new Line();
 
 	public Road() {
 		backCap = backNode.getNumberOfCars();
