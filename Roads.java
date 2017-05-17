@@ -9,7 +9,7 @@ public class Road {
    public node backnode = new node();
    public node forwardnode = new node();
    Line line1 = new Line();	
-   public Roads(){
+   public Road(){
 		
 	}
    public void setnumofLanes(int x) {
