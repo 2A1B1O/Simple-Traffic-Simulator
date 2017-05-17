@@ -25,7 +25,7 @@ public class Road {
 		y = lenght;
 	}
 
-	public int getnumofLanes() {
+	public int getNumofLanes() {
 		return numofLanes;
 	}
 
@@ -33,20 +33,20 @@ public class Road {
 		return lenght;
 	}
 
-	public void addtrafficlights(int k) {
+	public void addTrafficLights(int k) {
 		k = trafficlights;
 	}
 
-	public void setcapacity() {
+	public void setCapacity() {
 		Capacity = numofLanes * lenght;
 	}
 
-	public int getcapacity() {
+	public int getCapacity() {
 
 		return Capacity;
 	}
 
-	public void calculatetraffic() {
+	public void calculateTraffic() {
 		if (trafficlights == 0) {
 			traficconstant = backcap / Capacity;
 
@@ -57,7 +57,7 @@ public class Road {
 		}
 	}
 
-	public double gettrafficconstant() {
+	public double gettrafficConstant() {
 		return traficconstant;
 	}
 }
