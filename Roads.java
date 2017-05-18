@@ -16,6 +16,8 @@ public class Road {
 		forwardCap = forwardNode.getNumberOfCars();
 		backCap = forwardCap;
 	}
+	public void setLine(line) {
+		this.line1 = line;
 
 	public void setNumofLanes(int x) {
 		x = numofLanes;
