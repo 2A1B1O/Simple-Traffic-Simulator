@@ -43,18 +43,18 @@ public class Roundabout {
 	
 	public void setForwardNode(node a)
 	{
-		forwardNode.add(node a);
+		forwardNode.add(a);
 	}
 	public void setBackwardNode(node b)
 	{
-		backwardNode.add(node b);
+		backwardNode.add(b);
 		
 	}
-	public node getForwardNode()
+	public ArrayList<node> getForwardNode()
 	{
 		return forwardNode;
 	}
-	public node getBackwardNode()
+	public ArrayList<node> getBackwardNode()
 	{
 		return backwardNode;
 	}
