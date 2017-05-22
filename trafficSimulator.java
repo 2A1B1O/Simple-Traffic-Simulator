@@ -1,4 +1,4 @@
-import java.awt.EventQueue;
+import java.awt.EventQueue; // Orkun Orbay - Aslıhan Öztürk
 import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
@@ -23,8 +23,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JMenu;
 import java.awt.Color;
-import javax.swing.JButton;
-//filloval function will be used
 
 public class trafficSimulator extends JFrame {
 	private JPanel contentPane;
@@ -59,7 +57,7 @@ public class trafficSimulator extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.gray);
-		panel.setBounds(49, 43, 738, 365);
+		panel.setBounds(10, 59, 777, 339);
 		contentPane.add(panel);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -71,35 +69,24 @@ public class trafficSimulator extends JFrame {
 		menuBar.add(mnCreate);
 		Map myMap = new Map();
 		JMenuItem mnýtmRoad = new JMenuItem("Road");
-		
-
-		
-		
-		
-		
-		
 		class CreateRoadListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
+
 					Line a = new Line(0, 0, 0, 0);
 					Road r = new Road();
 					r.setLine(a);
-					myMap.AddRoad(r);
-					
-					panel.addMouseListener(new MouseAdapter() {  	//PANEL LISTENER BEGINS
+					myMap.AddRoad(r);                         // location info of road to be drawn will be kept in myMap object to be able to re-draw it again 
+					panel.addMouseListener(new MouseAdapter() { //PANEL LISTENER BEGINS
+
 						int oldX;
 						int oldY;
 						int newX;
 						int newY;
-						
-						// global bir state // design pattern
-						// ilk başta public enum State { NONE, ROAD, ROUNDABOUT };
-						// private State myState = NONE;
 
-						public void mousePressed(MouseEvent e1) {
-							oldX = e1.getX();
-							oldY = e1.getY();
+						public void mousePressed(MouseEvent evt) {
+							oldX = evt.getX();
+							oldY = evt.getY();
 							System.out.println("Source X is: " + oldX + ", Source Y is: " + oldY);
 						}
 
@@ -109,7 +96,7 @@ public class trafficSimulator extends JFrame {
 							System.out.println("Destination X is: " + newX + ", Destination Y is: " + newY);
 							Graphics g = panel.getGraphics();
 							g.drawLine(oldX, oldY, newX, newY);
-							a.setX(oldX);
+							a.setX(oldX);           // location info is passed to the road of myMap...
 							a.setY(oldY);
 							a.setX1(newX);
 							a.setY1(newY);
@@ -119,7 +106,6 @@ public class trafficSimulator extends JFrame {
 
 							final JComponent[] inputs = new JComponent[] { new JLabel("Density"), densityOfRoad,
 									new JLabel("Number Of Lanes"), laneNum,
-									
 
 							};
 							int result = JOptionPane.showConfirmDialog(null, inputs, "Road Values",
@@ -127,20 +113,17 @@ public class trafficSimulator extends JFrame {
 
 							if (result == JOptionPane.OK_OPTION) {
 								myMap.getMyRoads().get(1).setCapacity(Integer.parseInt(densityOfRoad.getText()));
-								
 							}
-							
 
-						} // MOUSE LISTENER ENDS
-						
-					}); // ACTION LISTENER ENDS
-					
-				} catch (Exception ex) {
-					System.out.println(ex.getMessage());
+						}
+
+					});
+
+				} catch (Exception E) {
+					System.out.println(E.getMessage());
 				}
 
 			}
-			
 		}
 		mnýtmRoad.addActionListener(new CreateRoadListener());
 		mnCreate.add(mnýtmRoad);
@@ -150,9 +133,8 @@ public class trafficSimulator extends JFrame {
 		class CreateRoundaboutListener implements ActionListener {
 			public void actionPerformed(ActionEvent evt) {
 				try {
-					panel.addMouseListener(new MouseAdapter() { // PANEL
-																// LISTENER
-																// BEGIN
+					panel.addMouseListener(new MouseAdapter() {
+
 						int roundX;
 						int roundY;
 
@@ -161,10 +143,26 @@ public class trafficSimulator extends JFrame {
 							roundY = e3.getY();
 							Graphics g = panel.getGraphics();
 							g.fillOval(roundX, roundY, 20, 20);
+							Dot merkez = new Dot(); // roundabout that was drawn
+													// onto panel needs to be
+													// saved as an object to
+													// save a file .
+							merkez.setX(roundX); // getting location info of
+													// roundabout to be able to
+													// draw it again on the same
+													// place while reading a
+													// file.
+							merkez.setY(roundY);
+							Circle c = new Circle();
+							c.setCenter(merkez);
+							Roundabout r = new Roundabout();
+							r.setLocation(c);
+							myMap.AddRoundabout(r);
+
 						}
-					}); // PANEL LISTENER ENDS
-				} catch (Exception a) {
-					System.out.println(a.getMessage());
+					});
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				}
 
 			}
@@ -211,7 +209,7 @@ public class trafficSimulator extends JFrame {
 		class OpenButtonListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 
-				try {
+				try { // FILE SAVE SYSTEM CODES...
 					File workingDirectory = new File(System.getProperty("user.dir"));
 
 					JFileChooser fc = new JFileChooser(workingDirectory);
@@ -222,23 +220,36 @@ public class trafficSimulator extends JFrame {
 						System.out.println("hata1");
 
 						Map mapToOpen = (Map) ois.readObject();
-						if(mapToOpen.getMyRoads()!=null){
-							for( int i =0;i<mapToOpen.getMyRoads().size();i++){
-								Road r=mapToOpen.getMyRoads().get(i);
-								Line l=r.getLine();
+						if (mapToOpen.getMyRoads() != null) { // READING THE
+																// ROADS ARRAY
+																// FROM THE MAP
+																// CLASS OBJECT
+																// THAT WAS
+																// SAVED IN A
+																// FILE
+							for (int i = 0; i < mapToOpen.getMyRoads().size(); i++) {
+								Road r = mapToOpen.getMyRoads().get(i);
+								Line l = r.getLine();
 								Graphics g = panel.getGraphics();
-								System.out.println(l.getX()+" "+l.getX1());
+								System.out.println(l.getX() + " " + l.getX1());
 								g.drawLine(l.getX(), l.getY(), l.getX1(), l.getY1());
-								
-								
-								
+
 							}
 						}
-						
-						// JOptionPane.showMessageDialog(trafficSimulator.this,
-						// "selected: "+
-						// fc.getSelectedFile(),"TrafficSimulator",
-						// JOptionPane.OK_OPTION );
+						if (mapToOpen.getMyRoundabouts() != null) { // READING
+																	// ROUNDABOUTS
+																	// FROM THE
+																	// MAP CLASS
+																	// OBJECT...
+							for (int i = 0; i < mapToOpen.getMyRoundabouts().size(); i++) {
+								Roundabout r = mapToOpen.getMyRoundabouts().get(i);
+								Circle l = r.getLocation();
+								Dot merkez = l.getCenter();
+								Graphics g = panel.getGraphics();
+								g.fillOval(merkez.getX(), merkez.getY(), 20, 20);
+
+							}
+						}
 
 					}
 
@@ -251,4 +262,5 @@ public class trafficSimulator extends JFrame {
 		menuBar.add(mnOpen);
 		mnOpen.add(mnýtmOpen);
 	}
+
 }
