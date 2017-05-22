@@ -1,22 +1,21 @@
-
 public class Dot {
- private	double x;
- private	double y;
+ private	int x;
+ private	int y;
 	
 	
 	public Dot() {
 		
 	}
-	public void setX(double at) {
+	public void setX(int at) {
 		x=at;
 	}
-    public double getX() {
+    public int getX() {
     	return x;
     }
-    public void setY(double at){
+    public void setY(int at){
     	y=at;
     }
-    public double getY() {
+    public int getY() {
     	return y;
     }
 }
