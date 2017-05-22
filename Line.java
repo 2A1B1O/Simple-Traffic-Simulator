@@ -6,6 +6,7 @@ public class Line implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 private int x,y,x1,y1;
+	private double distance;
 
 public Line(int x, int y, int x1, int y1) {
 	super();
@@ -45,6 +46,14 @@ public int getY1() {
 
 public void setY1(int y1) {
 	this.y1 = y1;
+}
+	public void setDistance(int x1, int y1, int x2, int y2, double distance) {
+		distance = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+	}
+
+	public double getDistance() {
+		return distance;
+	}
 }
 }
 
