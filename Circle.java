@@ -5,6 +5,14 @@ public class Circle {
 	int x;
 	int y;
 	Dot center = new Dot();
+	public Dot getCenter() {
+		return center;
+	}
+
+	public void setCenter(Dot center) {
+		this.center = center;
+	}
+
 	Line radius = new Line();
 	double r;
 	double diameter;
