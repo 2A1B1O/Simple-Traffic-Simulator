@@ -1,0 +1,35 @@
+
+public class Circle {
+	// g.fillOval(x - radius, y - radius, diameter, diameter); bu fonksiyona
+	// göre ayarlandı
+	int x;
+	int y;
+	Dot center = new Dot();
+	Line radius = new Line();
+	double r;
+	double diameter;
+
+	Circle() {
+		x = center.getX();
+		y = center.getY();
+
+	}
+
+	public void SetR() {
+		r = radius.getDistance();
+	}
+
+	public void SetDiameter() {
+		diameter = r * 2;
+
+	}
+
+	public double getR() {
+		return r;
+	}
+
+	public double getDiameter() {
+		return diameter;
+	}
+
+}
