@@ -10,12 +10,13 @@ public class Roundabout {
     private double power;
     private int totalForward;
     private int forwardCounter=0;
+     
 
 	Circle location = new Circle();
 
 	private ArrayList<node> forwardNode = new ArrayList<node>();
 	private ArrayList<node> backwardNode = new ArrayList<node>();
-
+        public Roundabaout(){}
 	public Roundabout(int Capacity, double Density) // constructor
 	{
 		capacity = Capacity;
