@@ -55,6 +55,5 @@ public void setY1(int y1) {
 		return distance;
 	}
 }
-}
 
 
