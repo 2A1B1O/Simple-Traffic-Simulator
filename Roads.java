@@ -1,4 +1,6 @@
-public class Road {
+import java.io.Serializable;
+
+public class Road implements Serializable {
 	private int numofLanes;
 	private int lenght;
 	private int capacity;
@@ -16,8 +18,14 @@ public class Road {
 		forwardCap = forwardNode.getNumberOfCars();
 		backCap = forwardCap;
 	}
-	public void setLine(line) {
+
+	public void setLine(Line line) {
 		this.line1 = line;
+	}
+
+	public Line getLine() {
+		return line1;
+	}
 
 	public void setNumofLanes(int x) {
 		x = numofLanes;
@@ -41,6 +49,10 @@ public class Road {
 
 	public void setCapacity() {
 		capacity = numofLanes * lenght;
+	}
+
+	public void setCapacity(int a) {
+		capacity = a;
 	}
 
 	public int getCapacity() {
