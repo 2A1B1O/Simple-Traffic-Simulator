@@ -1,4 +1,4 @@
-import java.awt.EventQueue; // Orkun Orbay - Aslıhan Öztürk
+import java.awt.EventQueue; // Aslıhan Öztürk- Save File System 
 import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
