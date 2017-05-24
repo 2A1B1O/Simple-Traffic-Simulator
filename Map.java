@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.w3c.dom.Node;
+
 
 public class Map implements Serializable {
 	private ArrayList<node> MyNodes = new ArrayList();
@@ -52,7 +52,10 @@ public class Map implements Serializable {
 	}
 
 	public void RemoveRoad() {
-		
+		// arrayin sadece so elemanı değil, istenilen elemanı silinmeli . arada
+		// boşluklar kalabilir mi ?
+		// öyleyse içine aldığı elemanı arraylistte bulmak için önce search
+		// yapıp sonra silicek? diğerleriyle Tartış.
 	}
 
 	public void RemoveRoundabout() {
@@ -65,4 +68,3 @@ public class Map implements Serializable {
 
 }
 
-}
