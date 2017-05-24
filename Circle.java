@@ -1,5 +1,7 @@
 
-public class Circle {
+import java.io.Serializable;
+
+public class Circle implements Serializable{
 	// g.fillOval(x - radius, y - radius, diameter, diameter); bu fonksiyona
 	// göre ayarlandı
 	int x;
